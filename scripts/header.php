@@ -18,9 +18,9 @@ echo <<<  _EOD
      <div id='capbutton' class='buttonname' name='capbuttonname' align='right'>
          <button id='but_login'  class='button_nav' value='4'>&nbsp LOGIN &nbsp  </button>
          <button id='but_logout' class='button_nav' value="5"> LOGOUT  </button>
-         <button id='but_sigin'  class="button_nav" value='6'> SINGIN  </button>     <!--  shop/scripts/admin.php  -->
+         <button id='but_sigin'  class="button_nav" onclick="document.location.href='../../shop/scripts/singin.php'"> SINGIN  </button>     
 
-         <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/index.php'"> HOME </button> <!-- ../../shop/index.php -->
+         <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/index.php'"> HOME </button>
          <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/scripts/admin.php'"> admin page </button>
          <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/scripts/catalog.php'"> move to catalog </button>
          <img src="../../shop/sources/green.png" height="40">
