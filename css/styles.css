@@ -1,0 +1,73 @@
+
+body {
+    width: 900px; 
+    margin: 20px auto;
+    /* padding: 8px, 8px, 8px, 8px auto; */
+    background: #a7cc6741;
+    border: 2px solid #962a2a;
+}
+html {
+    background: #313315c3;
+    /*width: 800px;*/  /* -=MY=- */
+}
+div.elements {
+    position: relative;
+    border: 10px rgb(29, 39, 42);
+    /* fixed relative absolute*/
+    top: 10px;
+    left: 40px; 
+    margin: 20px; 
+    /* padding: 30px auto; */
+    background-color: #578196; 
+    /*background: #6e9ea3; */
+
+}
+
+div#cap  {
+    /*color: red;*/
+    background:  rgb(149, 122, 80)
+}
+div.buttonname  { /* id='capbutton' class='buttonname' name='capbuttonname' */
+    background:  rgb(108, 144, 114)
+    
+}
+#logo {
+    font-family: Georgia , 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 97px;
+    
+}
+.button_nav{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+        
+    background: #54797e;
+    color: rgb(29, 39, 42);
+    margin: 4px;
+    border: 4px;
+    padding: 8px, 8px, 8px, 8px;
+    /*box-shadow: 3px, 3px, 4px blue;*/
+    box-shadow: 3px 3px 5px rgb(32, 39, 87);
+    
+    
+    /*align-content: end;*/
+    /*align-items: center;*/
+    /*align: 'right'*/
+    /*align-items: center;*/
+    border-radius: 8px;
+    width: 70px auto;
+    height: 30px;
+}
+
+.textarea_admin {
+    background: #7c898f;
+    /* margin: 80%; */
+    /* margin: 20px, 20px, 20px, 20px, auto; */
+    border-width: 2px;
+    border-radius: 6px;
+    font-size: large;
+    padding: 10px;
+}
