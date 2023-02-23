@@ -1,6 +1,6 @@
 body {
   background: #75bb45 url('../sources/images/tmm_php-mysql_background.png') repeat-y;
-  margin: 0 68px 0 68px;
+  margin: 70px 68px 70px 68px;
 }
 
 div#header {
@@ -84,7 +84,8 @@ a:hover {
 }
 
 div#footer {
-  background: #fff url('../sources/images/tmm_php-mysql_footer.png') no-repeat top left;
+  /* ../sources/images/tmm_php-mysql_footer.png */
+  background: #fff url('../sources/images/tmm_php-mysql_example-arrow.png') no-repeat top left;
   height: 114px;
   left: 11px;
   position: relative;

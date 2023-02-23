@@ -8,6 +8,17 @@ echo "<!DOCTYPE html>\n<html><head >";
 echo "<title>$app$userstr</title>" . "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 echo "<link rel='stylesheet' href='../../shop/css/styles.css' type='text/css'> ";
 
+//function CONFIRM
+echo<<<_EOD
+<script type="text/javascript">
+     function make_request_to_sql() {
+          if (confirm("Вы уверены, что запрос верен " + "\\n PRESS OK") ){
+               window.location="admin/createtables.php?user_id=" + "user_id";
+  }
+}
+</script>
+_EOD;
+
 echo "</head><body >" . "<center><canvas id='logo' width='624' height='86'>$app <i>  IT was hided </i></canvas></center>";  //width='624' height='86'
 echo "<div  id='cap' class='appname' name='capname' align='center'> <i> Have one &nbsp;</i>$app$userstr</div>" .
      "<script src='../../shop/js/javascript.js' type='text/javascript'></script>";

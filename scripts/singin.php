@@ -2,7 +2,10 @@
 
 //echo $_REQUEST['user'];
 
-
+$first_name ='';
+$last_name ='';
+$email ='';
+$user ='';
 
 if (isset($_REQUEST['user'])) {
     $first_name = $_POST['first_name'];
@@ -12,20 +15,16 @@ if (isset($_REQUEST['user'])) {
 }
 else {
     $_REQUEST[] = array();
-    $first_name ='';
-    $last_name ='';
-    $email ='';
-    $user ='';
 }
 
 
 
 ?>
 <!-- <?php 
-echo <<<_END
+echo <<<EOD
 <button id='but_err' class='button_nav'> HOME  </button>
  onclick="document.location.href='../index.php'" 
-_END;
+EOD;
 
 
 ?> -->
@@ -89,7 +88,7 @@ _END;
     </div>
 
     <div id="footer">
-        <p>ERROR</p> 
+        <p></p> 
     </div>
 </body>
 </html>
