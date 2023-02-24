@@ -1,19 +1,59 @@
 <?php
+error_reporting(E_ALL);
 
 //echo " <br />" . "CURENT PATH ADMIN " . __DIR__. "<br />";  
 include_once ('./functions.php');
 include_once ('./header.php');
 
 echo "<link rel='stylesheet' href='../css/styles.css' type='text/css'> ";
-//../shop/js/javascript.js
-
-
 echo "<link rel='url' href='./admin.php' type='text/php'>";
+
+
+//SELECT VERSION() AS version;
+$db_request = trim((string) filter_input(INPUT_GET, 'db_request', FILTER_SANITIZE_SPECIAL_CHARS) );
+
+if (isset ($db_request) & strlen($db_request)>0) {
+    $db_request = preg_replace("/[\n\r]+/i", ' ', $db_request);
+    
+    try {        
+        $cat = $pdo->query($db_request);
+        if ($cat->rowCount()>0) {
+            $db_request ="";
+            try {
+                while ($catalog = $cat->fetch()) {
+                    $db_request.= $catalog[0] . $catalog[1];
+                }
+                
+            }
+            catch (PDOException $ex) {
+                $db_request = $ex->getMessage();
+            }
+        }
+
+    }
+    catch (PDOException $exc) {
+        echo $exc->getTraceAsString();
+    }
+}
+else {
+    $db_request = 'It was an empty request or CREATE';
+}
+
+
+
+
+
+
+
+
+
+
+
 echo <<< _END
 <h3 align='center'> ADMIN OF DATABASES</h3>
 <div id='admin_top' class='admin' name='admin'>
 <form method="post" action="admin.php" enctype="text/php">
-   <textarea class="textarea_admin" id="text_area" rows="5" cols="70" > </textarea></br>
+   <textarea class="textarea_admin" id="text_area" rows="5" cols="70" > {$db_request} </textarea></br>
    <fildset class="fild_admin" >
         <input type="submit" value=" SET REQUEST " > 
         <input type="reset" value=" RESET FORM" >
@@ -22,6 +62,7 @@ echo <<< _END
 </div>
 <div></div>
 _END;
+
 //<button id='but_err'    class='button_nav' onclick=" make_request_to_sql('text_area') "> Make SQL request ! </button>
 //make_request_to_sql(user_id)  //document.location.href='admin/createtables.php
 echo <<<_EOD

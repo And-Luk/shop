@@ -13,8 +13,8 @@ echo<<<_EOD
 <script type="text/javascript">
      function make_request_to_sql(id){
           var sometext = document.getElementById(id).value ;
-          if (confirm("Вы уверены, что запрос верен" + "\\n Press OK\\n" + sometext)) {
-               window.location="admin/createtables.php?user_id="+sometext;
+          if (confirm("Вы уверены, что что хотите сделать запрос к БД" + "\\n \\t Press OK\\n \\n" + sometext)) {
+               window.location="admin.php?db_request="+sometext;
           }
           //this.alert(sometext);
      }
