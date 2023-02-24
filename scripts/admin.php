@@ -13,7 +13,7 @@ echo <<< _END
 <h3 align='center'> ADMIN OF DATABASES</h3>
 <div id='admin_top' class='admin' name='admin'>
 <form method="post" action="admin.php" enctype="text/php">
-   <textarea class="textarea_admin" id="text_request" rows="5" cols="70" > </textarea></br>
+   <textarea class="textarea_admin" id="text_area" rows="5" cols="70" > </textarea></br>
    <fildset class="fild_admin" >
         <input type="submit" value=" SET REQUEST " > 
         <input type="reset" value=" RESET FORM" >
@@ -22,13 +22,13 @@ echo <<< _END
 </div>
 <div></div>
 _END;
-
+//<button id='but_err'    class='button_nav' onclick=" make_request_to_sql('text_area') "> Make SQL request ! </button>
 //make_request_to_sql(user_id)  //document.location.href='admin/createtables.php
 echo <<<_EOD
 <div id='admin_first' class='admin' name='admin'>
 
    <fildset class="fild_admin" >
-   <button id='but_err'    class='button_nav' onclick=" make_request_to_sql(this) "> Make SQL request ! </button>
+   <button id='but_err'    class='button_nav' onclick=" make_request_to_sql('text_area') "> Make SQL request ! </button>
    <button id='but_err'    class='button_nav' onclick="document.location.href='admin/removetables.php'"> REMOVE TABLES ! </button>
 
 
@@ -51,6 +51,7 @@ echo "<div></div>";
 //     }
 
 
+//mysqli_close($connection);
 ?>
 </body>
 </html>
