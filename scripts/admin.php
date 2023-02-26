@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+
 
 //echo " <br />" . "CURENT PATH ADMIN " . __DIR__. "<br />";  
 include_once ('./functions.php');

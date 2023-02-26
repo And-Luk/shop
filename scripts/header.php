@@ -1,6 +1,7 @@
 <?php
 //echo " <br />" . "CURENT PATH HEADER " . __DIR__. "<br />"; 
 session_start();
+error_reporting(E_ALL);
 include_once ('functions.php');  //include_once ('functions.php');
 
 echo "<!DOCTYPE html>\n<html><head >";

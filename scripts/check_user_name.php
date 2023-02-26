@@ -1,8 +1,33 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+//session_start();
+require_once 'functions.php';
 
-echo date("d.m.Y H:i:s");
+$user_name = trim((string) filter_input(INPUT_POST, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
+
+$user_exists =" имя должно быть более 4 символов";
+
+if (isset ($user_name) & strlen($user_name)>4) {
+    
+    $query = sprintf("SELECT * FROM users WHERE user_name ='%s' ;",
+            $user_name);
+
+    try {
+        $response = $pdo->query($query);
+        //$response = $pdo->exec($query);
+
+        if ($response->rowCount() >0 ) {
+            $user_exists = " занято " . ' - '. date("d.m.Y H:i:s");
+        }
+        else {
+            $user_exists = " свободно " . ' - '. date("d.m.Y H:i:s");
+        }
+        }
+    catch (PDOException $exc){
+        $user_exists.= ' '. $exc->getTraceAsString();
+    }
+
+}
+
+
+echo $user_exists ;

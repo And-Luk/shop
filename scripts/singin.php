@@ -28,22 +28,43 @@ EOD;
 
     <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
     <link href="./singin.php" rel="alternate" type="text/PHP " />
-<!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>-->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
     
     <script type="text/javascript">
         
         $(function(){
-            $("#user_name").on("blur",function(){$("#user_name_i").load("check_user_name.php");});
+            $("#user_name").on("blur",function(){
+                
+                var user_name = $("#user_name").val().trim();
+                var param = {user_name: user_name};
+                $.ajax({
+                    url: 'check_user_name.php',
+                    type: 'POST',
+                    data: param,
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    success: function (response){ $("#user_name_i").html(response); },
+                    error: function (){ alert("ERROR");}
+                }); 
+                
+                
+//            try{
+//                //alert("error");
+//                }
+//                catch(err){
+//                    this.InnerHtml( err.toString());
+//                }
+                
+            });
+                
+                
         });
         
         $(function(){
             $("input[type='reset']").click(function(){$("#user_name_i").html(''); });
         });
 
-//        $("input[type='reset']").ajax()
-
-        
+       
     </script>
 
         
