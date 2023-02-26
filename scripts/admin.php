@@ -8,13 +8,9 @@ include_once ('./header.php');
 echo "<link rel='stylesheet' href='../css/styles.css' type='text/css'> ";
 echo "<link rel='url' href='./admin.php' type='text/php'>";
 
-
-//SELECT VERSION() AS version;
 $db_request = trim((string) filter_input(INPUT_GET, 'db_request', FILTER_SANITIZE_SPECIAL_CHARS) );
-
 if (isset ($db_request) & strlen($db_request)>0) {
-    $db_request = preg_replace("/[\n\r]+/i", ' ', $db_request);
-    
+    //$db_request = preg_replace("/[\n\r\t]+/i", ' ', $db_request);  
     try {        
         $cat = $pdo->query($db_request);
         if ($cat->rowCount()>0) {
@@ -23,13 +19,11 @@ if (isset ($db_request) & strlen($db_request)>0) {
                 while ($catalog = $cat->fetch()) {
                     $db_request.= $catalog[0] . $catalog[1];
                 }
-                
             }
             catch (PDOException $ex) {
                 $db_request = $ex->getMessage();
             }
         }
-
     }
     catch (PDOException $exc) {
         echo $exc->getTraceAsString();
@@ -38,15 +32,6 @@ if (isset ($db_request) & strlen($db_request)>0) {
 else {
     $db_request = 'It was an empty request or CREATE';
 }
-
-
-
-
-
-
-
-
-
 
 
 echo <<< _END

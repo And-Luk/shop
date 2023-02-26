@@ -1,21 +1,18 @@
 <?php
 
-//echo $_REQUEST['user'];
 
-$first_name ='';
-$last_name ='';
-$email ='';
-$user ='';
+$email = $user_name = $first_name = $last_name = $password = $passwd ='';
 
-if (isset($_REQUEST['user'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $user = $_POST['user'];
-}
-else {
-    $_REQUEST[] = array();
-}
+
+//if (isset($_REQUEST['user'])) {
+//    $first_name = $_POST['first_name'];
+//    $last_name = $_POST['last_name'];
+//    $email = $_POST['email'];
+//    $user = $_POST['user'];
+//}
+//else {
+//    $_REQUEST[] = array();
+//}
 
 
 
@@ -25,43 +22,92 @@ echo <<<EOD
 <button id='but_err' class='button_nav'> HOME  </button>
  onclick="document.location.href='../index.php'" 
 EOD;
-
-
 ?> -->
 
-<html>
-    
-<head>
-    <!-- <link href="../css/styles.css" rel="stylesheet" type="text/css" /> -->
+<html>   
+
     <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
-    <link href="./singin.php" rel="stylesheet" type="text/PHP " />
+    <link href="./singin.php" rel="alternate" type="text/PHP " />
+<!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
     
-</head>
-<body > <!-- bgcolor="#607050"  -->
+    <script type="text/javascript">
+        
+        $(function(){
+            $("#user_name").on("blur",function(){$("#user_name_i").load("check_user_name.php");});
+        });
+        
+        $(function(){
+            $("input[type='reset']").click(function(){$("#user_name_i").html(''); });
+        });
+
+//        $("input[type='reset']").ajax()
+
+        
+    </script>
+
+        
+<!-- <script type="text/javascript">
+        function check_user_name(name){
+            //var user_name = document.getElementByName(name); not
+            var user_name = document.getElementById(name) ;
+            
+            request = new asuncRequest();
+            //equest.open("POST","some.php",true);
+            
+            user_name.value = ' set ERRR no';
+        }
+</script> -->
+        
+
+<body >
+<!-- bgcolor="#607050"  //  value="<?php echo $user_name; ?>"  -->
+   
+    
+<!--    onblur="check_user_name('user_name')"         <img src="pic.jpg" alt="">  -->
+    
     <div id="header"><h1>hidden text</h1></div>
     <div id="example"> New user </div>
     
     <div>
         <h1>Регистрация нового пользователя</h1>
         <p> Введите свои данные</p>
-        <form action="singin.php" method="POST">
+        <form action="create_user.php" method="POST" enctype="mulipart/form-data" id="user_form">
             <fieldset>
+                <label for="user_name">Логин:</label>
+<!--                <img src="pic.jpg" alt="">-->
+<!--                <div id="user_name_div"> </div>-->
+
+                <input type="text" name="user_name" size="25"  id="user_name" />
+                <i id="user_name_i"></i>
+                <br />
+                
+                
+                
                 <label for="first_name">Имя:</label>
-                <input type="text" name="first_name" size="20" value="<?php echo $first_name; ?>" /><br />
+                <input type="text" name="first_name" size="25" value="<?php echo $first_name; ?>" /><br />
+                
                 <label for="last_name">Фамилия:</label>
-                <input type="text" name="last_name" size="20" value="<?php echo $last_name; ?>" /><br />
-                <label for="email">Адрес эл. почты:</label>
-                <input type="text" name="email" size="50" value="<?php echo $email; ?>" /><br />
-                <label for="user">Никнейм: </label>
-                <input type="text" name="user" size="20" value="<?php echo $user; ?>" /><br />
-                <label for=""></label>
-                <input type="text" name="" size=""/><br />
-                <label for=""></label>
-                <input type="text" name="" size="$alue"/><br />
-                <label for=""></label>
-                <input type="text" name="" size=""/><br />
-                <label for=""></label>
-                <input type="text" name="" size=""/><br />
+                <input type="text" name="last_name" size="25" value="<?php echo $last_name; ?>" /><br />
+                
+                <label for="password">Пароль: </label>
+                <input type="text" name="password" size="20" value="<?php echo $password; ?>" /><br />
+                
+                <label for="passwd">подтверждение пароля: </label>
+                <input type="text" name="passwd" size="20" value="<?php echo $passwd; ?>" /><br />
+                
+                <label for="email">Эл. почта: </label>
+                <input type="text" name="email" size="25" value="<?php echo $email; ?>" /><br />
+                                
+                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                <label for="user_pic">Photo:</label>
+                <input type="file" name="user_pic" size="30" /><br />
+                
+                
+<!--                <label for=""></label>
+                <input type="text" name="" size=""/><br />-->
+                
+
                 <p> </p>
             </fieldset>
             <br />

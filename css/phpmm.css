@@ -1,6 +1,11 @@
 body {
   background: #75bb45 url('../sources/images/tmm_php-mysql_background.png') repeat-y;
-  margin: 70px 68px 70px 68px;
+
+  margin: 70px 68px 70px 68px ;
+      
+    /*align-items: center;*/
+    
+    /*align-items: center;*/
 }
 
 div#header {
