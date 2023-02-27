@@ -2,7 +2,7 @@
 //echo " <br />" . "CURENT PATH INDEX " . __DIR__. "<br />";  
 //include_once(dirname(__FILE__).'scripts/header.php');
 include_once ('./scripts/header.php');
-include_once ('./scripts/functions.php');
+//include_once ('./scripts/functions.php');
 
 //include_once (__DIR__.'./scripts/header.php');
 //include_once (__DIR__ . '../shop/scripts/functions.php');

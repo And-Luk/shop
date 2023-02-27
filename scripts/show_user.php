@@ -3,11 +3,17 @@
 session_start();
 require_once 'functions.php';
 
-$user_id = trim((string) filter_input(INPUT_SERVER, 'user_id', FILTER_DEFAULT) );
-$user_name = trim((string) filter_input(INPUT_POST, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
+
+$user_id = $_SESSION['user_id'];
+$user_name = $_SESSION["user_name"];
+//$user_id_get =   trim((string) filter_input(INPUT_GET, 'user_id', FILTER_DEFAULT) );
+//$user_name_get = trim((string) filter_input(INPUT_GET, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
 
 if (strlen($user_id)> 0) {
     echo 'SET';
+    
+    
+    
 }
  else {
     echo 'WRONG';
@@ -77,8 +83,8 @@ if (strlen($user_id)> 0) {
         <p> User Page  </p>
         
         <div>
-            <p> <?php echo $user_id; ?>  </p>
-            <p> <?php echo $user_name; ?> ERROR </p>
+            <p> <?php echo $user_id ; ?>  </p>
+            <p> <?php echo $user_name ; ?> </p>
             
             
             

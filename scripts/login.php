@@ -4,12 +4,13 @@ session_start();
 require_once 'functions.php';
 define("VALID_USERNAME", "admin");
 define("VALID_PASSWORD", "root");
+$page_title = 'LOGIN';
 
-//$user_name = trim((string) filter_input(INPUT_SERVER, PHP_URL_USER, FILTER_SANITIZE_SPECIAL_CHARS) );
-//$password = trim((string) filter_input(INPUT_SERVER, PHP_URL_PASS, FILTER_SANITIZE_SPECIAL_CHARS) );
 $user_name = trim((string) filter_input(INPUT_POST, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
 $password = trim((string) filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS) );
 $message ='';
+
+
 if (isset($user_name) & isset($password) & strlen($user_name)>4 & strlen($password)>4 ) {
     
     $query = sprintf("SELECT user_id FROM users WHERE user_name ='%s' AND password ='%s' ;",
@@ -25,8 +26,9 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4 & strlen($passwo
             else {
                 $resurs = $response->fetch();
                 $_SESSION['user_id'] = $resurs['user_id'];
-                $_SESSION['user_name'] = $user_name;
-                header("Location: show_user.php?user_id=". $resurs['user_id']."&user_name=".$user_name );
+                $_SESSION['user_name'] = $user_name;            
+                header("Location: show_user.php?user_id=" . $resurs['user_id'] . "&user_name=". $user_name );
+                
                 //$message = 'Confirm: user_id = '. $resurs['user_id'];
                 //$message = 'Confirm: user_id = '. $user_id[0];
             }
@@ -36,12 +38,6 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4 & strlen($passwo
     }
     
 }
-
-//if (!isset($user_name) || !isset($password) || $user_name != VALID_USERNAME || $password != VALID_PASSWORD ){
-//    header('HTTP/1.1 401 Unauthorized');
-//    header('WWW-Authenticate: Basic realm=" The Shop" ');
-//    //header('Location: ../index.php');
-//}
 
 
 
@@ -54,7 +50,7 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4 & strlen($passwo
 ?>
 
 <html>   
-
+    <title>{$page_title}</title>
     <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
     <link href="./login.php" rel="alternate" type="text/PHP " />
 
