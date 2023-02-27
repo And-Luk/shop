@@ -38,7 +38,7 @@ echo "<link id='logol' rel='url' href='./scripts/header.php' type='text/php'>";
 
 echo <<<  _EOD
      <div id='capbutton' class='buttonname' name='capbuttonname' align='right'>
-         <button id='but_login'  class='button_nav' value='4'>&nbsp LOGIN &nbsp  </button>
+         <button id='but_login'  class='button_nav' onclick="document.location.href='../../shop/scripts/login.php'" >&nbsp LOGIN &nbsp  </button>
          <button id='but_logout' class='button_nav' value="5"> LOGOUT  </button>
          <button id='but_sigin'  class="button_nav" onclick="document.location.href='../../shop/scripts/singin.php'"> SINGIN  </button>     
 

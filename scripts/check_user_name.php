@@ -24,7 +24,7 @@ if (isset ($user_name) & strlen($user_name)>4) {
         }
         }
     catch (PDOException $exc){
-        $user_exists.= ' '. $exc->getTraceAsString();
+        $user_exists.= ' '. $exc->getMessage();
     }
 
 }
