@@ -10,11 +10,14 @@ body {
 
 div#header {
   background: #fff url('../sources/images/tmm_php-mysql_banner.png') no-repeat top left;
+/*  background: #fff url('../sources/images/brands.jpg') no-repeat top  left;*/
+/*  background: #fff url('../sources/images/dolphin.png') no-repeat top  left;*/
   height: 114px;
   left: 11px;
-  position: relative;
-  top: 36px;
+
+  top: 30px;
   width: 753px;
+  position: relative;
 }
 
 #header h1 {
@@ -89,8 +92,8 @@ a:hover {
 }
 
 div#footer {
-  /* ../sources/images/tmm_php-mysql_footer.png */
-  background: #fff url('../sources/images/tmm_php-mysql_example-arrow.png') no-repeat top left;
+  /* ../sources/images/tmm_php-mysql_footer.png           ../sources/images/tmm_php-mysql_example-arrow.png*/
+  background: #fff url('../sources/images/tmm_php-mysql_footer.png') no-repeat top left;
   height: 114px;
   left: 11px;
   position: relative;

@@ -1,7 +1,7 @@
 <?php
 //echo " <br />" . "CURENT PATH HEADER " . __DIR__. "<br />"; 
-session_start();
-error_reporting(E_ALL);
+//session_start();
+ error_reporting(E_ALL);
 include_once ('functions.php');  //include_once ('functions.php');
 
 echo "<!DOCTYPE html>\n<html><head >";
@@ -23,13 +23,6 @@ echo<<<_EOD
 _EOD;
 
 
-
-
-
-
-
-
-
 echo "</head><body >" . "<center><canvas id='logo' width='624' height='86'>$app <i>  IT was hided </i></canvas></center>";  //width='624' height='86'
 echo "<div  id='cap' class='appname' name='capname' align='center'> <i> Have one &nbsp;</i>$app$userstr</div>" .
      "<script src='../../shop/js/javascript.js' type='text/javascript'></script>";
@@ -43,7 +36,7 @@ echo <<<  _EOD
          <button id='but_sigin'  class="button_nav" onclick="document.location.href='../../shop/scripts/singin.php'"> SINGIN  </button>     
 
          <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/index.php'"> HOME </button>
-         <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/scripts/admin.php'"> admin page </button>
+         <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/index.php'"> page index </button>
          <button id='but_err'    class='button_nav' onclick="document.location.href='../../shop/scripts/catalog.php'"> move to catalog </button>
          <img src="../../shop/sources/green.png" height="40">
 

@@ -1,12 +1,28 @@
 <?php
-
-
-//echo " <br />" . "CURENT PATH ADMIN " . __DIR__. "<br />";  
+session_start();
 include_once ('./functions.php');
 include_once ('./header.php');
 
+
+if (!isset( $_SESSION['user_id'])) {
+    header('Location:'. "../index.php" . "?user_id=" );
+    exit();
+}
+if (! user_in_group($_SESSION['user_id'], 'Administrator')) {
+    header('Location:'. "../index.php" . "?user_id=" );
+    exit();
+}
+
+
+
+
 echo "<link rel='stylesheet' href='../css/styles.css' type='text/css'> ";
 echo "<link rel='url' href='./admin.php' type='text/php'>";
+
+
+
+
+
 
 $db_request = trim((string) filter_input(INPUT_GET, 'db_request', FILTER_SANITIZE_SPECIAL_CHARS) );
 if (isset ($db_request) & strlen($db_request)>0) {

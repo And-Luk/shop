@@ -2,22 +2,11 @@
 
 session_start();
 require_once 'functions.php';
+display_title('SHOW USER');
 
+//$user_id = $_SESSION['user_id'];
+//$user_name = $_SESSION["user_name"];
 
-$user_id = $_SESSION['user_id'];
-$user_name = $_SESSION["user_name"];
-//$user_id_get =   trim((string) filter_input(INPUT_GET, 'user_id', FILTER_DEFAULT) );
-//$user_name_get = trim((string) filter_input(INPUT_GET, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
-
-if (strlen($user_id)> 0) {
-    echo 'SET';
-    
-    
-    
-}
- else {
-    echo 'WRONG';
-}
 
 //$message ='';
 //if (isset($user_name) & isset($password) & strlen($user_name)>4 & strlen($password)>4 ) {
@@ -47,44 +36,17 @@ if (strlen($user_id)> 0) {
 
 
 
-
-
-
-
-
-
 ?>
 
-<html>   
 
-    <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
-    <link href="./login.php" rel="alternate" type="text/PHP " />
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
-    
-    <script type="text/javascript">
-        
-
-    </script>
-
-        
-        
-
-<body >
- 
-    
-
-    
-    <div id="header"><h1>hidden text</h1></div>
-    <div id="example"> New user </div>
-    
+   
     <div>
         <h1> Enter </h1>
         <p> User Page  </p>
         
         <div>
-            <p> <?php echo $user_id ; ?>  </p>
-            <p> <?php echo $user_name ; ?> </p>
+            <p> <?php echo '$user_id not work this' ; ?>  </p>
+            <p> <?php echo '$user_name not work this' ; ?> </p>
             
             
             

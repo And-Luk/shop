@@ -1,2 +1,2 @@
 # shop
-A test shop site 
+A simple site for a shop 

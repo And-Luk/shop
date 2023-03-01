@@ -1,19 +1,10 @@
 <?php
 
 require_once 'app_config.php';
-//define("DATABASE_HOST","localhost");
-//define("DATABASE_USERNAME","root");
-//define("DATABASE_PASSWORD","Rasmus");
-//define("DATABASE_NAME","shop");
 
-$appname = (string)"магазин";
-$userstr = (string)' (GUEST)';
-$app = (string)$appname;
-//$page_title ='';
-
-
+//$dsn = "mysql:host=localhost;dbname=myDatabase;charset=utf8mb4";
  try {
-     $pdo =new PDO('mysql: host=' . DATABASE_HOST .'; dbname=' .DATABASE_NAME,
+     $pdo =new PDO('mysql: host=' . DATABASE_HOST .'; dbname=' .DATABASE_NAME. '; charset=utf8mb4'   ,
                     DATABASE_USERNAME,
                     DATABASE_PASSWORD,
                     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);    
@@ -24,58 +15,99 @@ $app = (string)$appname;
 }
 
 function user_in_group($user_id, $group){
-      
-    $query_string = 'SELECT COUNT(*)
+    global $pdo;
+    $query_string = <<< SQL
+                    SELECT ugr.user_id
                     FROM  user_groups ugr, group_names gnm
-                    WHERE gnm.name = :group
-                    AND ugr.group_id = gnm.id
-                    AND ugr.group_id = :user_id';
+                    WHERE 
+                    ugr.group_id = gnm.id
+                    AND gnm.name = :group 
+                    AND ugr.user_id = :user_id
+            SQL;
     $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
     
     $sth->execute(['group' => $group, 'user_id' => $user_id]);
-    $resurs = $sth->fetchAll();
+    //$resurs = $sth->fetchAll();
    
-    if ($resurs > 0) {
+    if ($sth->rowCount() ==  1) {
         return true;
     }    
     return false;
 }
 
+//function authenticate_in_group($param) {
+//    $user_id='';
+//    if ( isset( $_SESSION['user_id'])  ) {
+//    $user_id = $_SESSION['user_id'];
+//    }
+//}
+//
+//function get_web_path($param) {
+//    $main_path = str_replace('/users/and/www/shop/', '', $param);
+//    $full = "{$main_path}";
+//    return $full;
+//    //  /Users/and/www/shop/scripts
+//}
+
+
+
+function get_all_users($database){
+    global $pdo;
+    $query_string = <<<SQL
+            SELECT user_id, user_name, password, first_name, last_name, user_pic_path, image_id FROM $database
+    SQL;
+
+    $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+    $sth->execute();
+    $resurs = $sth->fetchAll(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC  //PDO::FETCH_NUM
+    return $resurs;
+}
+
 
 
 function display_title($page_title) {
+       
+    $user_id='';
+    $user_name='';
+if ( isset( $_SESSION['user_id'])  ) {
     $user_id = $_SESSION['user_id'];
-    $user_name = $_SESSION["user_name"];
-//$user_id_get =   trim((string) filter_input(INPUT_GET, 'user_id', FILTER_DEFAULT) );
-//$user_name_get = trim((string) filter_input(INPUT_GET, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
-//    <link href="./login.php" rel="alternate" type="text/PHP " /> 
+    $user_name = $_SESSION["user_name"];  
+}
+    
+
     
     echo <<<_END
-    <html>
-    <head>
-    <title>{$page_title}</title>
-    <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
+    <!DOCTYPE html>\n
+        <html><head>
+            <title>{$page_title}</title>
+            <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
 
-   <body>
+    </head><body>
     <div id="page_start">
     <div id="header"><h1>hidden The Missing Manual</h1></div>
     <div id="example"> {$user_name} </div>
     <div id="menu">
       <ul>
-        <li><a href="index.html">Home</a></li>
-    
+        <li><a href="../index.php">Home</a></li>
     _END;
     
     if (user_in_group($user_id, 'Administrator')) {
-    echo 'SET ADMIN'; 
-}
- else {
+        echo <<<_END
+        <li><a href="./show_users.php">Manage users</a></li>
+        <li><a href="admin.php">Manage databases</a></li>
+        <li><a href="index.php"> button 1</a></li>
+        <li><a href="index.php"> button 2</a></li>
+        _END;
+    }
+    else {
     echo 'WRONG';
-}
+    }
     
-    
 }
+
+
+
 
 
 
