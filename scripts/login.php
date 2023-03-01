@@ -113,23 +113,17 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4 & strlen($passwo
         <form action="login.php" method="POST"  id="signup_form" >
             <fieldset>
                 <label for="user_name">Логин:</label>
-<!--                <img src="pic.jpg" alt="">-->
-<!--                <div id="user_name_div"> </div>-->
-
                 <input type="text" name="user_name" size="25"  id="user_name" />
                 <i id="user_name_i"> <?php echo $message; ?> </i>
                 <br />
                 
-
                 
                 <label for="password">Пароль: </label>
                 <input type="password" name="password" size="20" " /><br />
 
-<!--                <label for=""></label>
-                <input type="text" name="" size=""/><br />-->
-                
+                <p>&nbsp;</p>
 
-                <p> </p>
+                
             </fieldset>
             <br />
             <fieldset class="center">

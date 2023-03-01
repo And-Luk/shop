@@ -1,11 +1,10 @@
 <?php
 
-//session_start();
 require_once 'functions.php';
 
 $user_name = trim((string) filter_input(INPUT_POST, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
 
-$user_exists =" имя должно быть более 4 символов";
+$user_exists =" имя должно не менее 5 символов";
 
 if (isset ($user_name) & strlen($user_name)>4) {
     
