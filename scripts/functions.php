@@ -23,10 +23,11 @@ function user_in_group($user_id, $group){
                     ugr.group_id = gnm.id
                     AND gnm.name = :group 
                     AND ugr.user_id = :user_id
-            SQL;
-    $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+    SQL;
     
-    $sth->execute(['group' => $group, 'user_id' => $user_id]);
+    $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+    $sth->execute(['group'   => $group,
+                   'user_id' => $user_id]);
     //$resurs = $sth->fetchAll();
    
     if ($sth->rowCount() ==  1) {
@@ -54,7 +55,8 @@ function user_in_group($user_id, $group){
 function get_all_users($database){
     global $pdo;
     $query_string = <<<SQL
-            SELECT user_id, user_name, password, first_name, last_name, user_pic_path, image_id FROM $database
+            SELECT user_id, user_name, password, first_name, last_name, user_pic_path, image_id
+            FROM $database
     SQL;
 
     $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);

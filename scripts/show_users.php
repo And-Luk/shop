@@ -28,20 +28,16 @@ _END;
     $(function(){
         $('img').on("click", function(){
             var $this = $(this);
-            
             if(this.className === 'free_user'){
                 $("#attention").html(this.alt + " is blocked"); 
                 $this.attr('src', '../sources/images/check_false.jpg');
                 $this.attr('class', 'block_user');
-
                 return;
             }
             if(this.className === 'block_user'){
                 $("#attention").html(this.alt + ' is unblocked'); 
                 $this.attr('src', '../sources/images/check_true.jpg');
                 $this.attr('class', 'free_user');
-                
-                
                 
 //                var user_name = $("#user_name").val().trim();
 //                var param = {user_name: user_name};
@@ -52,14 +48,9 @@ _END;
 //                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 //                    success: function (response){ $("#user_name_i").html(response); },
 //                    error: function (){ alert("ERROR");}
-                
-                
-                
+
                 return;
             }
-            
-            
-            
             
         });
     });
@@ -75,20 +66,23 @@ _END;
                 $this.attr('src', '../sources/images/check_false.jpg');
                 
                 
-                var user_id = this.id;          //$("#user_name").val().trim();
-                var param = {user_id: user_id};
+                var user_id = $this;     //this.id;  //
+                var param = {user_id: user_id};   //{user_id: user_id};
                 $.ajax({
                     url: 'delete_user.php',
                     type: 'POST',
                     data: param,
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    success: function (response){ $("#user_name_i").html(response); },
+                    success: function (response){ $("#attention").html(this.alt + ' is deleted' + response); },
+                    
                     error: function (){ alert("ERROR");}
-                
-                
+                });
+
+
+
             }
         });
-        });
+    });
 
 </script>
 

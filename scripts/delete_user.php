@@ -16,12 +16,29 @@ $user_id = trim((string) filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_SPE
 
 // Build the DELETE statement
 $query_string = <<<SQL
-        DELETE FROM users WHERE user_id = :user_id
+        DELETE FROM users
+        WHERE user_id = :user_id
 SQL;
 
 // Delete the user from the database
-$sth = $pdo->prepare($query_string);
-$sth->execute(['user_id' => $user_id]);
+try {
+    $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+    $sth->execute(['user_id' => $user_id]);
+
+    if ($sth !== false) {
+        echo 'Successful DELETE user FROM users';
+    }
+    else {
+        echo 'There is a problem ' . '<br>';
+        print_r($pdo->errorInfo()) . '<br>';
+        print_r($sth->errorInfo()) . '<br>';
+    }
+}
+catch (PDOException $exc) {
+    echo $exc->getTraceAsString() . '<br>';
+}
+
+
 
 //if ($sth->rowCount() ==  1) {
 //        return true;
