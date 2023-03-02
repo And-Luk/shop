@@ -61,25 +61,24 @@ _END;
     $(function(){
         $("img[class='del_user']").click( function(){
             var $this = $(this);
-            if(window.confirm('You ar goin to DELETE:\t "'  + this.alt + '"\n Are You sure? Press OK'  )){
-                $("#attention").html('You have blocked right now: "' + this.alt + '" '); 
-                $this.attr('src', '../sources/images/check_false.jpg');
+            if(window.confirm('You ar goin to DELETE:\n\t "'  + this.alt + '"\n\n Are You sure? Press OK')){
+                //$this.attr('src', '../sources/images/check_false.jpg');
+
+                var user_id = this.id;
+                var param = {user_id: user_id};
+                var user_name = this.alt;
                 
-                
-                var user_id = $this;     //this.id;  //
-                var param = {user_id: user_id};   //{user_id: user_id};
                 $.ajax({
                     url: 'delete_user.php',
                     type: 'POST',
                     data: param,
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    success: function (response){ $("#attention").html(this.alt + ' is deleted' + response); },
-                    
+                    success: function (response){
+                        $('#attention').html(response);
+                        
+                    },
                     error: function (){ alert("ERROR");}
                 });
-
-
-
             }
         });
     });

@@ -26,7 +26,7 @@ try {
     $sth->execute(['user_id' => $user_id]);
 
     if ($sth !== false) {
-        echo 'Successful DELETE user FROM users';
+        echo 'Successful deleted user ID = ' . $user_id . ' FROM users' ;
     }
     else {
         echo 'There is a problem ' . '<br>';
@@ -47,6 +47,6 @@ catch (PDOException $exc) {
 
 
 // Redirect to show_users to re-show users (without this deleted one)
-$msg = "The user you specified has been deleted.";
-header("Location: show_users.php?success_message={$msg}");
+//$msg = "The user you specified has been deleted.";
+//header("Location: show_users.php?success_message={$msg}");
 
