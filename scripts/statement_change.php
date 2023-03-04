@@ -13,20 +13,30 @@ if (! user_in_group($_SESSION['user_id'], 'Administrator')) {
 
 // Get the user ID of the user to delete
 $user_id = trim((string) filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_SPECIAL_CHARS) );
+$statement = trim((string) filter_input(INPUT_POST, 'statement', FILTER_SANITIZE_SPECIAL_CHARS) );
+
+if ($user_id == null || $statement == null) {
+    //return false;
+    echo ' user_id or statement = null ';
+    //exit();
+}
 
 // Build the DELETE statement
 $query_string = <<<SQL
-        DELETE FROM users
+        UPDATE users
+        SET  statement = :statement
         WHERE user_id = :user_id
 SQL;
 
 // Delete the user from the database
 try {
     $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
-    $sth->execute(['user_id' => $user_id]);
+    $sth->execute(['user_id'   => $user_id,
+                   'statement' => $statement,
+                  ]);
 
     if ($sth !== false) {
-        echo 'Successful deleted user ID = ' . $user_id . ' FROM users' ;
+        echo 'Successfully changed user_id = "' . $user_id . '" status IN users' ;
     }
     else {
         echo 'There is a problem ' . '<br>';

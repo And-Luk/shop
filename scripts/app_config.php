@@ -10,7 +10,3 @@ $appname = (string)"магазин";
 $userstr = (string)' (GUEST)';
 $app = (string)$appname;
 //$page_title ='';
-
-
-
-?>

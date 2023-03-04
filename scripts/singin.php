@@ -19,8 +19,7 @@ $email = $user_name = $first_name = $last_name = $password = $passwd ='';
 ?>
 <!-- <?php 
 echo <<<EOD
-<button id='but_err' class='button_nav'> HOME  </button>
- onclick="document.location.href='../index.php'" 
+<button id='but_err' class='button_nav'> HOME  </button>  onclick="document.location.href='../index.php'" 
 EOD;
 ?> -->
 
@@ -82,10 +81,6 @@ EOD;
         
 
 <body >
-<!-- bgcolor="#607050"  //  value="<?php echo $user_name; ?>"  -->
-   
-    
-<!--    onblur="check_user_name('user_name')"         <img src="pic.jpg" alt="">  -->
     
     <div id="header"><h1>hidden text</h1></div>
     <div id="example"> New user </div>
@@ -96,9 +91,6 @@ EOD;
         <form action="create_user.php" method="POST" enctype="mulipart/form-data" id="user_form">
             <fieldset>
                 <label for="user_name">Логин:</label>
-<!--                <img src="pic.jpg" alt="">-->
-<!--                <div id="user_name_div"> </div>-->
-
                 <input type="text" name="user_name" size="25"  id="user_name" />
                 <i id="user_name_i"></i>
                 <br />
@@ -119,14 +111,11 @@ EOD;
                 
                 <label for="email">Эл. почта: </label>
                 <input type="text" name="email" size="25" value="<?php echo $email; ?>" /><br />
-                                
-                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                
                 <label for="user_pic">Photo:</label>
-                <input type="file" name="user_pic" size="30" /><br />
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                <input type="file"   name="user_pic" size="30" /><br />
                 
-                
-<!--                <label for=""></label>
-                <input type="text" name="" size=""/><br />-->
                 
 
                 <p> </p>

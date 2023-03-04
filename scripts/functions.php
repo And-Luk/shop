@@ -55,7 +55,7 @@ function user_in_group($user_id, $group){
 function get_all_users($database){
     global $pdo;
     $query_string = <<<SQL
-            SELECT user_id, user_name, password, first_name, last_name, user_pic_path, image_id
+            SELECT user_id, statement, user_name, password, first_name, last_name, user_pic_path, image_id
             FROM $database
     SQL;
 
@@ -68,49 +68,39 @@ function get_all_users($database){
 
 
 function display_title($page_title) {
-       
-    $user_id='';
-    $user_name='';
-if ( isset( $_SESSION['user_id'])  ) {
-    $user_id = $_SESSION['user_id'];
-    $user_name = $_SESSION["user_name"];  
-}
-    
-
-    
+         
+    if ( isset( $_SESSION['user_id'])  ) {
+        $user_id = $_SESSION['user_id'];
+        $user_name = $_SESSION["user_name"];
+    }
     echo <<<_END
-    <!DOCTYPE html>\n
-        <html><head>
+    <html>
+        <head>
             <title>{$page_title}</title>
             <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
-
-    </head><body>
-    <div id="page_start">
-    <div id="header"><h1>hidden The Missing Manual</h1></div>
-    <div id="example"> {$user_name} </div>
-    <div id="menu">
-      <ul>
-        <li><a href="../index.php">Home</a></li>
+        </head>
+        <body>
+            <div id="page_start">
+            <div id="header"><h1>hidden The Missing Manual</h1></div>
+            <div id="example"> {$user_name} </div>
+            <div id="menu">
+            <ul>
+                <li><a href="../index.php">Home</a></li>
     _END;
+            
     
     if (user_in_group($user_id, 'Administrator')) {
         echo <<<_END
-        <li><a href="./show_users.php">Manage users</a></li>
-        <li><a href="admin.php">Manage databases</a></li>
-        <li><a href="index.php"> button 1</a></li>
-        <li><a href="index.php"> button 2</a></li>
+                <li><a href="./show_users.php">Manage users</a></li>
+                <li><a href="admin.php">Manage databases</a></li>
+                <li><a href="index.php"> button 1</a></li>
+                <li><a href="index.php"> button 2</a></li>
+            </ul>
         _END;
     }
-    else {
-    echo 'WRONG';
-    }
+    else { echo 'WRONG'; }
     
+    
+
 }
-
-
-
-
-
-
-?>
