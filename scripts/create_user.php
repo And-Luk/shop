@@ -6,7 +6,7 @@ $user_name =   trim((string) filter_input(INPUT_POST, 'user_name',  FILTER_SANIT
 $password =    trim((string) filter_input(INPUT_POST, 'password',   FILTER_SANITIZE_SPECIAL_CHARS) );
 $first_name =  trim((string) filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS) );
 $last_name =   trim((string) filter_input(INPUT_POST, 'last_name',  FILTER_SANITIZE_SPECIAL_CHARS) );
-$image_id =    trim((string) filter_input(INPUT_POST, 'image_id',   FILTER_SANITIZE_SPECIAL_CHARS) ) ;
+// $image_id =    trim((string) filter_input(INPUT_POST, 'image_id',   FILTER_SANITIZE_SPECIAL_CHARS) ) ;
 
 $query_string = <<<SQL
         INSERT INTO users
@@ -25,7 +25,29 @@ try {
                    'image_id'   => $image_id_INT]);
 
     if ($sth !== false) {
-        echo 'Successful INSERT INTO users';
+        
+        //$sth->
+        session_start();
+        $_SESSION['user_id']       = INF;
+        $_SESSION['statement']     = 2;
+        $_SESSION['user_name']     = $user_name;
+        $_SESSION['password']      = $password;
+        $_SESSION['first_name']    = $first_name;
+        $_SESSION['last_name']     = $last_name;
+        $_SESSION['user_pic_path'] = 'through clear LOGIN';
+        $_SESSION['image_id']      = 0;
+        
+        header('Location:'. "../index.php" . "?user_id=$user_name" );
+        exit();
+        
+        //echo 'Successful INSERT INTO users';
+        
+        
+        
+        
+        
+        
+        
     }
     else {
         echo 'There is a problem ' . '<br>';

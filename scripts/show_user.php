@@ -2,6 +2,9 @@
 
 session_start();
 require_once 'functions.php';
+
+
+
 display_title('SHOW USER');
 
 //$user_id = $_SESSION['user_id'];

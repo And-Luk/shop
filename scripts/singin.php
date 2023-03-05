@@ -1,27 +1,24 @@
 <?php
+session_start();
+require_once 'functions.php';
 
+if ( isset( $_SESSION['user_id'])  ) {
+    $user_id    = $_SESSION['user_id'];
+    $statement  = $_SESSION['statement'];
+    $user_name  = $_SESSION['user_name'];
+    $password   = $passwd = $_SESSION['password'];
+    $first_name = $_SESSION['first_name'];
+    $last_name  = $_SESSION['last_name'];
+    
 
-$email = $user_name = $first_name = $last_name = $password = $passwd ='';
-
-
-//if (isset($_REQUEST['user'])) {
-//    $first_name = $_POST['first_name'];
-//    $last_name = $_POST['last_name'];
-//    $email = $_POST['email'];
-//    $user = $_POST['user'];
-//}
-//else {
-//    $_REQUEST[] = array();
-//}
-
-
+    //$user_pic_path = $_SESSION['user_pic_path'];
+    //$image_id = $_SESSION['image_id'];
+    $email      ='not used now';
+}
 
 ?>
-<!-- <?php 
-echo <<<EOD
-<button id='but_err' class='button_nav'> HOME  </button>  onclick="document.location.href='../index.php'" 
-EOD;
-?> -->
+
+
 
 <html>   
 
@@ -80,7 +77,7 @@ EOD;
 </script> -->
         
 
-<body >
+<body>
     
     <div id="header"><h1>hidden text</h1></div>
     <div id="example"> New user </div>
@@ -91,26 +88,26 @@ EOD;
         <form action="create_user.php" method="POST" enctype="mulipart/form-data" id="user_form">
             <fieldset>
                 <label for="user_name">Логин:</label>
-                <input type="text" name="user_name" size="25"  id="user_name" />
+                <input type="text" name="user_name" size="25"  id="user_name" value="<?= $user_name ?>" />
                 <i id="user_name_i"></i>
                 <br />
                 
                 
                 
                 <label for="first_name">Имя:</label>
-                <input type="text" name="first_name" size="25" value="<?php echo $first_name; ?>" /><br />
+                <input type="text" name="first_name" size="25" value="<?= $first_name ?>" /><br />
                 
                 <label for="last_name">Фамилия:</label>
-                <input type="text" name="last_name" size="25" value="<?php echo $last_name; ?>" /><br />
+                <input type="text" name="last_name" size="25" value="<?= $last_name ?>" /><br />
                 
                 <label for="password">Пароль: </label>
-                <input type="text" name="password" size="20" value="<?php echo $password; ?>" /><br />
+                <input type="password" name="password" size="20" value="<?= $password ?>" /><br />
                 
                 <label for="passwd">подтверждение пароля: </label>
-                <input type="text" name="passwd" size="20" value="<?php echo $passwd; ?>" /><br />
+                <input type="password" name="passwd" size="20" value="<?= $password ?>" /><br />
                 
                 <label for="email">Эл. почта: </label>
-                <input type="text" name="email" size="25" value="<?php echo $email; ?>" /><br />
+                <input type="text" name="email" size="25" value="<?= $email ?>" /><br />
                 
                 <label for="user_pic">Photo:</label>
                 <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
