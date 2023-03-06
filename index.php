@@ -38,7 +38,7 @@ if (user_in_group($user_id, 'Administrator')) {
     echo <<<_END
      <ul>
         <li><a href="./scripts/show_user.php">Show User Page</a></li>
-        <li><a href="./scripts/show_users.php">Show users</a></li>
+        <li><a href="./scripts/show_users.php">Show users list</a></li>
         <li><a href="./scripts/admin.php">Manage database</a></li>
         <!-- <li><a href="index.php"> HOME </a></li> -->
      <ul>

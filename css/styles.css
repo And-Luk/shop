@@ -3,11 +3,11 @@ body {
     width: 900px; 
     margin: 20px auto;
     /* padding: 8px, 8px, 8px, 8px auto; */
-    background: #a7cc6741;
+    background: #7c6741;
     border: 2px solid #962a2a;
 }
 html {
-    background: #313315c3;
+    background: #313315;
     /*width: 800px;*/  /* -=MY=- */
 }
 div.elements {
@@ -48,7 +48,7 @@ div.buttonname  { /* id='capbutton' class='buttonname' name='capbuttonname' */
     color: rgb(29, 39, 42);
     margin: 4px;
     border: 4px;
-    padding: 8px, 8px, 8px, 8px;
+    padding: 8px 8px 8px 8px;
     /*box-shadow: 3px, 3px, 4px blue;*/
     box-shadow: 3px 3px 5px rgb(32, 39, 87);
     
@@ -58,7 +58,7 @@ div.buttonname  { /* id='capbutton' class='buttonname' name='capbuttonname' */
     /*align: 'right'*/
     /*align-items: center;*/
     border-radius: 8px;
-    width: 70px auto;
+    width: 70px;
     height: 30px;
 }
 

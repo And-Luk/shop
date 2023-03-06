@@ -6,7 +6,7 @@ require_once 'functions.php';
 
 $user_id    = $_SESSION['user_id']    ?? null ;
 $statement  = $_SESSION['statement']  ?? null ;
-$user_name  = $_SESSION['user_name']  ?? 'New user' ;
+$user_name  = $_SESSION['user_name']  ?? 'New_user_' ;
 $password   = $_SESSION['password']   ?? null ;
 $first_name = $_SESSION['first_name'] ?? null ;
 $last_name  = $_SESSION['last_name']  ?? null ;
@@ -21,18 +21,17 @@ $email      = $_SESSION['email']      ?? 'not used now';
 
 
 
-<html>   
-
+<html>
+    <head>
+        <title>SINGUP</title>
+    </head>
     <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
     <link href="./singin.php" rel="alternate" type="text/PHP " />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
     
     <script type="text/javascript">
-        
         $(function(){
             $("#user_name").on("blur",function(){
-                
                 var user_name = $("#user_name").val().trim();
                 var param = {user_name: user_name};
                 $.ajax({
@@ -43,24 +42,14 @@ $email      = $_SESSION['email']      ?? 'not used now';
                     success: function (response){ $("#user_name_i").html(response); },
                     error: function (){ alert("ERROR");}
                 }); 
-                
-                
-//            try{
-//                //alert("error");
-//                }
-//                catch(err){
-//                    this.InnerHtml( err.toString());
-//                }
+
                 
             });
- 
         });
         
         $(function(){
             $("input[type='reset']").click(function(){$("#user_name_i").html(''); });
         });
-
-       
     </script>
 
         
@@ -83,11 +72,11 @@ $email      = $_SESSION['email']      ?? 'not used now';
     <div>
         <h1>Регистрация нового пользователя</h1>
         <p> Введите свои данные</p>
-        <form action="create_user.php" method="POST" enctype="mulipart/form-data" id="user_form">
+        <form action="create_user.php" method="POST" enctype="multipart/form-data" id="user_form">
             <fieldset>
                 
                 <label for="user_name">Логин:</label>
-                <input type="text" name="user_name" size="25"  id="user_name" value="<?= $user_name ?>" />
+                <input type="text" name="user_name" size="25"  id="user_name" value="<?= $user_name ?>" placeholder="unique username" />
                 <i id="user_name_i"></i>
                 <br />
                                 
@@ -101,18 +90,16 @@ $email      = $_SESSION['email']      ?? 'not used now';
                 <input type="password" name="password" size="20" value="<?= $password ?>" /><br />
                 
                 <label for="passwd">подтверждение пароля: </label>
-                <input type="password" name="passwd" size="20" value="<?= $password ?>" /><br />
+                <input type="password" name="passwd" size="20" value="<?= $password ?>"  placeholder="confirm password"/><br />
                 
                 <label for="email">Эл. почта: </label>
-                <input type="text" name="email" size="25" value="<?= $email ?>" /><br />
+                <input type="text" name="email" size="25" placeholder="not used now" /><br />
                 
+                <!--<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />-->
                 <label for="user_pic">Photo:</label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                 <input type="file"   name="user_pic" size="30" /><br />
                 
-                
 
-                <p> </p>
             </fieldset>
             <br />
             <fieldset class="center">

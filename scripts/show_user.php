@@ -5,7 +5,7 @@ require_once 'functions.php';
 
 
 
-display_title('SHOW USER');
+
 
 //$user_id = $_SESSION['user_id'];
 //$user_name = $_SESSION["user_name"];
@@ -38,39 +38,27 @@ display_title('SHOW USER');
 //}
 
 
-
+display_title('SHOW USER');
 ?>
-
-
    
-    <div>
-        <h1> Enter </h1>
-        <p> User Page  </p>
-        
         <div>
-            <p> <?php echo '$user_id not work this' ; ?>  </p>
-            <p> <?php echo '$user_name not work this' ; ?> </p>
-            
-            
-            
-        </div>
+            <h1> Enter </h1>
+            <p> User Page  </p>
+            <div>
+                <p> <?= '$user_id not work this' ?>  </p>
+                <p> <?= '$user_name not work this' ?> </p>
+            </div>
         
-        <br />
-        <form action="../index.php" method='post'>
-            <fieldset  class="center">
-                <?php
-                    echo <<<_END
-                        <button id='but_err' class='button_nav' onclick="document.location.href='../index.php'"> TO HOME </button>
-                        _END;
-                    //echo " <br />" . " SINGIN.PHP " . __DIR__. "<br />";
-                ?>
-            </fieldset>
-        </form>
-
-    </div>
-
-    <div id="footer">
-        <p></p> 
+            <br />
+            <form action="../index.php" method='post'>
+                <fieldset  class="center">
+                    <button id='but_err' class='button_nav' onclick="document.location.href='../index.php'"> TO HOME </button>
+                </fieldset>
+            </form>
+        </div>
+        <div id="footer" >
+            <p></p> 
+        </div>
     </div>
 </body>
 </html>

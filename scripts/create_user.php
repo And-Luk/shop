@@ -9,7 +9,7 @@ $last_name =   trim((string) filter_input(INPUT_POST, 'last_name',  FILTER_SANIT
 // $image_id =    trim((string) filter_input(INPUT_POST, 'image_id',   FILTER_SANITIZE_SPECIAL_CHARS) ) ;
 #_____________________________________________________________________________________________________
 
-$upload_dir = '../sources/uploads/profile_pics';
+$upload_dir = '../sources/uploads/profile_pics/';
 $image_fieldname = 'user_pic';
 $image_errors = [
     1 => 'Max size in php.ini',
@@ -18,9 +18,10 @@ $image_errors = [
     4 => 'was\'t choiced any file',
 ];
 
-if($_FILES[$image_fieldname]['error'] != 0 ){
+if(! isset($_FILES[$image_fieldname])){             //$_FILES[$image_fieldname]['error'] != 0
     print 'The server can not get a picture';
-    echo $image_errors($_FILES[$image_fieldname]['error']);
+    echo $image_errors[$_FILES[$image_fieldname]['error'] ] ;
+    goto without_image;
 }
 
 @is_uploaded_file($_FILES[$image_fieldname]['tmp_name']) or
@@ -37,10 +38,9 @@ while (file_exists($upload_filename = $upload_dir . $now_is .'-'. $_FILES[$image
 @move_uploaded_file($_FILES[$image_fieldname]['tmp_name'], $upload_filename) or
         print "rules does not exist for folder {$image_fieldname}";
 
-        
-        
 
-#-------------------------------------------------------------------------------------------------------
+        
+without_image:      
 $query_string = <<<SQL
         INSERT INTO users
                (user_name, password, first_name, last_name, image_id)

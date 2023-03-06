@@ -9,9 +9,9 @@ require_once 'app_config.php';
                     DATABASE_PASSWORD,
                     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);    
 } catch (PDOException $ex) {
-    echo $ex->getMessage() . '< /br>';
-    echo $pdo->errorInfo() . '< /br>';
-    echo $pdo->errorCode() . '< /br>'; 
+    echo $ex->getMessage() . '<br />';
+    echo $pdo->errorInfo() . '<br />';
+    echo $pdo->errorCode() . '<br />'; 
 }
 
 function user_in_group(string $user_id, string $group): bool {
@@ -36,13 +36,7 @@ function user_in_group(string $user_id, string $group): bool {
     return false;
 }
 
-//function authenticate_in_group($param) {
-//    $user_id='';
-//    if ( isset( $_SESSION['user_id'])  ) {
-//    $user_id = $_SESSION['user_id'];
-//    }
-//}
-//
+
 //function get_web_path($param) {
 //    $main_path = str_replace('/users/and/www/shop/', '', $param);
 //    $full = "{$main_path}";
@@ -69,51 +63,55 @@ function get_all_users( $database): ? array {
 
 function display_title(string $page_title): void {
          
-    if ( isset( $_SESSION['user_id'])  ) {
-        $user_id = $_SESSION['user_id'];
-        $user_name = $_SESSION["user_name"];
-    } else {
-        $user_id = INF;
-        $user_name =' GUEST ';
-    }
+//    if ( isset( $_SESSION['user_id'])  ) {
+//        $user_id = $_SESSION['user_id'];
+//        $user_name = $_SESSION["user_name"];
+//    } else {
+//        $user_id = '';
+//        $user_name =' GUEST ';
+//    }
+    
+    $user_id   = $_SESSION['user_id']   ?? '';
+    $user_name = $_SESSION["user_name"] ?? 'GUEST_in_display_title';
+    
+    
     echo <<<_END
     <html>
         <head>
             <title>{$page_title}</title>  
-
-        </head>  
+        </head>
+        <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
     <body>
-            
-            <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
-            <div id="page_start">
+        <div id="page_start">
             <div id="header"><h1>hidden The Missing Manual</h1></div>
             <div id="example"> {$user_name} </div>
             <div id="menu">
-
     _END;
             
     
     if ( user_in_group($user_id, 'Administrator')) {
         echo <<<_END
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="./show_users.php">Show users</a></li>
-                <li><a href="admin.php">Manage databases</a></li>
-                <li><a href="index.php"> button 1</a></li>
-                <li><a href="index.php"> button 2</a></li>
-            </ul>
+                <ul>
+                    <li><a href="../index.php">Home</a></li>
+                    <li><a href="./show_users.php">Show users list</a></li>
+                    <li><a href="admin.php">Manage databases</a></li>
+                    <li><a href="index.php"> button 1</a></li>
+                    <li><a href="index.php"> button 2</a></li>
+                </ul>
+            </div>
         _END;
     }
     else {
         echo <<<_END
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-                <!--        <li><a href="./show_users.php">Manage users</a></li>
-                <li><a href="admin.php">Manage databases</a></li>                  -->
-                <li><a href="index.php"> button 1</a></li>
-                <li><a href="index.php"> button 2</a></li>
-            </ul>
+                <ul>
+                    <li><a href="../index.php">Home</a></li>
+                    <!--        <li><a href="./show_users.php">Manage users</a></li>
+                    <li><a href="admin.php">Manage databases</a></li>                  -->
+                    <li><a href="index.php"> button 1</a></li>
+                    <li><a href="index.php"> button 2</a></li>
+                </ul>
+            </div>
         _END;
         }
 }
