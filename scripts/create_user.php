@@ -7,7 +7,40 @@ $password =    trim((string) filter_input(INPUT_POST, 'password',   FILTER_SANIT
 $first_name =  trim((string) filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS) );
 $last_name =   trim((string) filter_input(INPUT_POST, 'last_name',  FILTER_SANITIZE_SPECIAL_CHARS) );
 // $image_id =    trim((string) filter_input(INPUT_POST, 'image_id',   FILTER_SANITIZE_SPECIAL_CHARS) ) ;
+#_____________________________________________________________________________________________________
 
+$upload_dir = '../sources/uploads/profile_pics';
+$image_fieldname = 'user_pic';
+$image_errors = [
+    1 => 'Max size in php.ini',
+    2 => 'Max size in HTML',
+    3 => 'only partial of file',
+    4 => 'was\'t choiced any file',
+];
+
+if($_FILES[$image_fieldname]['error'] != 0 ){
+    print 'The server can not get a picture';
+    echo $image_errors($_FILES[$image_fieldname]['error']);
+}
+
+@is_uploaded_file($_FILES[$image_fieldname]['tmp_name']) or
+        print "{$_FILES[$image_fieldname]['tmp_name']} not a file! ";
+
+@getimagesize($_FILES[$image_fieldname]['tmp_name']) or
+        print "{$_FILES[$image_fieldname]['tmp_name']} not an image ";
+
+$now_is = time();
+while (file_exists($upload_filename = $upload_dir . $now_is .'-'. $_FILES[$image_fieldname]['name'] )){
+    $now_is++;
+}
+
+@move_uploaded_file($_FILES[$image_fieldname]['tmp_name'], $upload_filename) or
+        print "rules does not exist for folder {$image_fieldname}";
+
+        
+        
+
+#-------------------------------------------------------------------------------------------------------
 $query_string = <<<SQL
         INSERT INTO users
                (user_name, password, first_name, last_name, image_id)
@@ -26,9 +59,9 @@ try {
 
     if ($sth !== false) {
         
-        //$sth->
+        //$sth->   PDO::lastInsertId(?string $name = null): string|false
         session_start();
-        $_SESSION['user_id']       = INF;
+        $_SESSION['user_id']       = $pdo->lastInsertId();
         $_SESSION['statement']     = 2;
         $_SESSION['user_name']     = $user_name;
         $_SESSION['password']      = $password;
@@ -37,7 +70,7 @@ try {
         $_SESSION['user_pic_path'] = 'through clear LOGIN';
         $_SESSION['image_id']      = 0;
         
-        header('Location:'. "../index.php" . "?user_id=$user_name" );
+        header('Location:'. "./show_user.php"  ); //. "?user_name=$user_name"
         exit();
         
         //echo 'Successful INSERT INTO users';

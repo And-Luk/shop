@@ -4,14 +4,14 @@ require_once 'app_config.php';
 
 //$dsn = "mysql:host=localhost;dbname=myDatabase;charset=utf8mb4";
  try {
-     $pdo =new PDO('mysql: host=' . DATABASE_HOST .'; dbname=' .DATABASE_NAME. '; charset=utf8mb4'   ,
+     $pdo = new PDO('mysql: host=' . DATABASE_HOST .'; dbname=' .DATABASE_NAME. '; charset=utf8mb4'   ,
                     DATABASE_USERNAME,
                     DATABASE_PASSWORD,
                     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);    
 } catch (PDOException $ex) {
-    echo $ex->getMessage() + '< /br>';
-    echo $pdo->errorInfo() + '< /br>';
-    echo $pdo->errorCode() + '< /br>'; 
+    echo $ex->getMessage() . '< /br>';
+    echo $pdo->errorInfo() . '< /br>';
+    echo $pdo->errorCode() . '< /br>'; 
 }
 
 function user_in_group(string $user_id, string $group): bool {

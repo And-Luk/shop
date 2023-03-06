@@ -17,16 +17,23 @@ if ( isset( $_SESSION['user_id'])  ) {
 
 
 if (isset($user_id) && isset($user_name)) {
+
+
+
+
+
     
 
 
 
 if (user_in_group($user_id, 'Administrator')) {
-    echo "<pre><div );' >" .                                  // style='background:  rgb(67, 103, 135
-         "<button id='but_1' class='button_nav'> КАТАЛОГ </button>" .
-         "<button id='but_2' class='button_nav'> BIN     </button> " .
-         "<button id='but_3' class='button_nav'> MAP     </button>" .
-         "</div></pre>";
+    echo "<pre>"
+        . "<div>"                                 
+            . "<button id='but_1' class='button_nav'> КАТАЛОГ </button> "
+            . "<button id='but_2' class='button_nav'> BIN     </button> "
+            . "<button id='but_3' class='button_nav'> MAP     </button> " 
+        . "</div>"
+        . "</pre>";
     
     echo <<<_END
      <ul>
