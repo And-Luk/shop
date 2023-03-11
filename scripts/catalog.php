@@ -5,7 +5,7 @@ require_once("./catalog/element.php");
 echo "<link id='catalog' rel='url' href='./catalog.php' type='text/php'>";
 
 echo <<<_END
-<p align= "center"> START of PAGE  </p> 
+<p align= "center"> START of ITEMS  </p> 
 _END;
 
 
@@ -18,7 +18,9 @@ $draw_factory->draw();
 
 
 echo <<<_END
-<p align= "center"> END of PAGE  </p> 
+<br />
+<p align= "center"> END of ITEMS  </p> 
+<br />
 _END;
 ?>
 </body>

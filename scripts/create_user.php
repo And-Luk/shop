@@ -6,7 +6,7 @@ $user_name =   trim((string) filter_input(INPUT_POST, 'user_name',  FILTER_SANIT
 $password =    trim((string) filter_input(INPUT_POST, 'password',   FILTER_SANITIZE_SPECIAL_CHARS) );
 $first_name =  trim((string) filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS) );
 $last_name =   trim((string) filter_input(INPUT_POST, 'last_name',  FILTER_SANITIZE_SPECIAL_CHARS) );
-// $image_id =    trim((string) filter_input(INPUT_POST, 'image_id',   FILTER_SANITIZE_SPECIAL_CHARS) ) ;
+$image_id =    trim((string) filter_input(INPUT_POST, 'image_id',   FILTER_SANITIZE_SPECIAL_CHARS) ) ;
 #_____________________________________________________________________________________________________
 
 $upload_dir = '../sources/uploads/profile_pics/';
@@ -31,11 +31,11 @@ if(! isset($_FILES[$image_fieldname])){             //$_FILES[$image_fieldname][
         print "{$_FILES[$image_fieldname]['tmp_name']} not an image ";
 
 $now_is = time();
-while (file_exists($upload_filename = $upload_dir . $now_is .'-'. $_FILES[$image_fieldname]['name'] )){
+while (file_exists($user_pic_path = $upload_dir . $now_is .'-'. $_FILES[$image_fieldname]['name'] )){
     $now_is++;
 }
 
-@move_uploaded_file($_FILES[$image_fieldname]['tmp_name'], $upload_filename) or
+@move_uploaded_file($_FILES[$image_fieldname]['tmp_name'], $user_pic_path) or
         print "rules does not exist for folder {$image_fieldname}";
 
 
@@ -43,19 +43,23 @@ while (file_exists($upload_filename = $upload_dir . $now_is .'-'. $_FILES[$image
 without_image:      
 $query_string = <<<SQL
         INSERT INTO users
-               (user_name, password, first_name, last_name, image_id)
-        VALUES (:user_name, :password, :first_name, :last_name , :image_id)
+               ( user_name,  password,  first_name,  last_name,  user_pic_path,  image_id)
+        VALUES (:user_name, :password, :first_name, :last_name, :user_pic_path, :image_id)
 SQL;
 
+//////$last_name  = $_SESSION['last_name']  ?? null ;
 $image_id_INT = is_int($image_id) ? $image_id : 0;
 
 try {
     $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
-    $sth->execute(['user_name'  => $user_name,
-                   'password'   => $password,
-                   'first_name' => $first_name,
-                   'last_name'  => $last_name,
-                   'image_id'   => $image_id_INT]);
+    $sth->execute(['user_name'     => $user_name,
+                   'password'      => $password,
+                   'first_name'    => $first_name,
+                   'last_name'     => $last_name,
+                   
+                   'user_pic_path' => $user_pic_path,
+                   'image_id'      => $image_id_INT,
+                ]);
 
     if ($sth !== false) {
         
@@ -67,7 +71,7 @@ try {
         $_SESSION['password']      = $password;
         $_SESSION['first_name']    = $first_name;
         $_SESSION['last_name']     = $last_name;
-        $_SESSION['user_pic_path'] = 'through clear LOGIN';
+        $_SESSION['user_pic_path'] = $user_pic_path ?? '';
         $_SESSION['image_id']      = 0;
         
         header('Location:'. "./show_user.php"  ); //. "?user_name=$user_name"
@@ -91,13 +95,3 @@ try {
 catch (PDOException $exc) {
     echo $exc->getTraceAsString() . '<br>';
 }
-
-
-//$query_string = sprintf("INSERT INTO users" .
-//        "(user_name, password, first_name, last_name, image_id)" . 
-//        "VALUES('%s','%s','%s','%s','%d');",
-//        $user_name,
-//        $password,
-//        $first_name,
-//        $last_name,
-//        $image_id );

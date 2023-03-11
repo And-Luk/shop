@@ -6,15 +6,16 @@ require_once 'functions.php';
 
 $user_id    = $_SESSION['user_id']    ?? null ;
 $statement  = $_SESSION['statement']  ?? null ;
-$user_name  = $_SESSION['user_name']  ?? 'New_user_' ;
+$user_name  = $_SESSION['user_name']  ?? 'user' ;
 $password   = $_SESSION['password']   ?? null ;
 $first_name = $_SESSION['first_name'] ?? null ;
 $last_name  = $_SESSION['last_name']  ?? null ;
 $passwd     = $password;
+//$user_pic   = $_SESSION['user_pic_path'] ?? '';
 $email      = $_SESSION['email']      ?? 'not used now';
  
 
-//$user_pic_path = $_SESSION['user_pic_path'];
+
 //$image_id = $_SESSION['image_id'];
 
 ?>

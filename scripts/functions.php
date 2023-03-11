@@ -1,13 +1,14 @@
 <?php
 
 require_once 'app_config.php';
-
 //$dsn = "mysql:host=localhost;dbname=myDatabase;charset=utf8mb4";
- try {
-     $pdo = new PDO('mysql: host=' . DATABASE_HOST .'; dbname=' .DATABASE_NAME. '; charset=utf8mb4'   ,
+//$dsn = "mysql:host=localhost;dbname=myDatabase;charset=utf8mb4";
+try {
+     $pdo = new PDO('mysql: host=' . DATABASE_HOST .'; dbname=' .DATABASE_NAME. '; charset=utf8mb4' ,
                     DATABASE_USERNAME,
                     DATABASE_PASSWORD,
-                    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);    
+                    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+     //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $ex) {
     echo $ex->getMessage() . '<br />';
     echo $pdo->errorInfo() . '<br />';
@@ -46,7 +47,7 @@ function user_in_group(string $user_id, string $group): bool {
 
 
 
-function get_all_users( $database): ? array {
+function get_all_users($database): ? array {
     global $pdo;
     $query_string = <<<SQL
             SELECT user_id, statement, user_name, password, first_name, last_name, user_pic_path, image_id

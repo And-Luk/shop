@@ -1,6 +1,14 @@
 <?php
 //require_once("../header.php");
 require_once("../functions.php");
+//echo $_ENV['PASSWORD'].'<br />';
+//echo $_ENV['HELLO'].'<br />';
+echo '<pre>';
+
+print "$_ENV";
+
+echo '</pre>';
+
 echo<<<_EOD
 <style>
     body {

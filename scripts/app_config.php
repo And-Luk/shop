@@ -6,8 +6,8 @@ define("DATABASE_NAME","shop");
 
 define("SITE_ROOT", "/users/and/www/shop/");
 
-$appname = (string)"магазин";
-$userstr = (string)' (GUEST)';
+$appname = (string)" тестовый сайт ";
+$userstr = (string)' GUEST ';
 $app = (string)$appname;
 //$page_title ='';
 

@@ -27,7 +27,6 @@ echo "<link id='upgrade' rel='url' href='./show_users.php' type='text/php'>";
                 var user_id = this.id;
                 var statement = 3;
                 var param = {user_id: user_id, statement: statement};
-                
                 $.ajax({
                     url: 'statement_change.php',
                     type: 'POST',
@@ -35,7 +34,6 @@ echo "<link id='upgrade' rel='url' href='./show_users.php' type='text/php'>";
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     success: function (response){
                         $('#attention').html(response);
-                        
                     },
                     error: function (){ alert("ERROR");}
                 });
@@ -58,7 +56,6 @@ echo "<link id='upgrade' rel='url' href='./show_users.php' type='text/php'>";
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     success: function (response){
                         $('#attention').html(response);
-                        
                     },
                     error: function (){ alert("ERROR");}
                 });
@@ -81,7 +78,6 @@ echo "<link id='upgrade' rel='url' href='./show_users.php' type='text/php'>";
                 
                 var user_id = this.id;
                 var param = {user_id: user_id};
-                
                 $.ajax({
                     url: 'remove_user.php',
                     type: 'POST',
@@ -98,11 +94,9 @@ echo "<link id='upgrade' rel='url' href='./show_users.php' type='text/php'>";
                         newdiv.id = 'NewDiv';
                         newdiv.innerHTML= 'NEW DIV';
                         document.body.appendChild(newdiv);
-
                     },
                     error: function (){
                         alert("ERROR");
-
                     }
                 });
                 

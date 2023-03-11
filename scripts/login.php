@@ -5,7 +5,7 @@ require_once 'functions.php';
 //define("VALID_USERNAME", "admin");
 //define("VALID_PASSWORD", "root");
 $page_title = 'LOGIN'; 
-$message ='';
+//$message ='';
 
 
 //if (null === $user_name = $_SESSION['user_id']) {
@@ -14,51 +14,74 @@ $message ='';
 //
 //}
 
-    $user_name = trim((string) filter_input(INPUT_POST, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
-    $password = trim((string) filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS) );
+$user_name = trim((string) filter_input(INPUT_POST, 'user_name', FILTER_SANITIZE_SPECIAL_CHARS) );
+$password  = trim((string) filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS) );
 
 
+$message =   trim((string) filter_input(INPUT_GET, 'user_id', FILTER_SANITIZE_SPECIAL_CHARS) );
 
 
-if (isset($user_name) & isset($password) & strlen($user_name)>4 & strlen($password)>4 ) {
+//$message   = trim((string) $arr['user_id']);
+
+if (isset($user_name) & isset($password) & strlen($user_name)>4  ) {  //& strlen($user_name)>4 & strlen($password)>4
     
     $query_string = <<<SQL
         SELECT user_id, statement, user_name, password, first_name, last_name, user_pic_path, image_id
         FROM users
         WHERE user_name = :user_name 
-        AND password = :password
-SQL; 
-    
+        AND password    = :password
+    SQL; 
+ 
 
     try {
-        
         $sth = $pdo->prepare($query_string, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
         $sth->execute([
-                        'user_name' => $user_name,
-                        'password' => $password,
+                       'user_name' => $user_name,
+                       'password'  => $password,
                       ]);
 
+        
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $ncolumn = $sth->rowCount(); // > 0 ? 1 : 0;
 
-            if ($sth->rowCount()===0) {
-                $message = " Password or Login is WRONG ! ";
-            }
-            else {
-                //$message = $user_name;
-                $_SESSION['user_name'] = $user_name;
-                $_SESSION['password'] = $password;
-                
-                $resurs = $sth->fetch();
-                
-                $_SESSION['user_id']       = $resurs['user_id'];
-                $_SESSION['statement']     = $resurs['$statement'];
-                $_SESSION['first_name']    = $resurs['$first_name'];
-                $_SESSION['last_name']     = $resurs['$last_name'];
-                $_SESSION['user_pic_path'] = $resurs['$user_pic_path'];
-                $_SESSION['image_id']      = $resurs['$image_id'];
+        if ($sth->rowCount() == 0) {   //$ncolumn = $sth->fetchColumn() == 0   //$sth->rowCount()===0
+            $message = " Password or Login is WRONG ! ";
+        }
+        else {
+            $_SESSION['user_name'] = $user_name;
+            $_SESSION['password']  = $password;
 
-                header("Location: show_user.php?user_id=" . $resurs['user_id'] . "&user_name=". $user_name );
-                
-                //$message = 'Confirm: user_id = '. $resurs['user_id'];
+//Array
+//(
+//    [user_id] => 14
+//    [statement] => 2
+//    [user_name] => And-Box
+//    [password] => Rasmus
+//    [first_name] => Andrei
+//    [last_name] => Luk
+//    [user_pic_path] => 
+//    [image_id] => 0
+//)                
+           
+            $_SESSION['user_id']       = $result['user_id']       != null ? $result['user_id']       : '_____';
+            $_SESSION['statement']     = $result['statement']     != null ? $result['statement']     : '_____';
+            $_SESSION['first_name']    = $result['first_name']    != null ? $result['first_name']    : '_____';
+            $_SESSION['last_name']     = $result['last_name']     != null ? $result['last_name']     : '_____';
+            $_SESSION['user_pic_path'] = $result['user_pic_path'] != null ? $result['user_pic_path'] : '_____';
+            $_SESSION['image_id']      = $result['image_id']      != null ? $result['image_id']      : '_____';
+            //header("Location: show_user.php?user_id=" . $result['user_id'] . "&user_name=". $user_name );   //login.php
+            header("Location:". "show_user.php"
+                    . "?user_name="    . $user_name
+                    . "&user_id="      . $_SESSION['user_id']
+                    . "&statement="    . $_SESSION['statement']
+                    . "&first_name="   . $_SESSION['first_name']
+                    . "&last_name="    . $_SESSION['last_name']
+                    . "&image_id="     . $_SESSION['image_id']
+                    . "&user_pic_path=". $_SESSION['user_pic_path']
+                    );
+            exit();
+
+                //$message = 'Confirm: user_id = '. $result['user_id'];
                 //$message = 'Confirm: user_id = '. $user_id[0];
             }
         }
@@ -147,6 +170,12 @@ SQL;
                 <input type="reset" value="Очистить "   />
             </fieldset>
             <br />
+            <?php 
+            echo '<pre>' ; 
+            echo "$ncolumn".'<br />';
+            print_r($result);
+            echo '</pre>' ;
+            ?>
 
             <br />
         </form>
