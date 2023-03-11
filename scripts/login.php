@@ -5,7 +5,7 @@ require_once 'functions.php';
 //define("VALID_USERNAME", "admin");
 //define("VALID_PASSWORD", "root");
 $page_title = 'LOGIN'; 
-//$message ='';
+$message ='';
 
 
 //if (null === $user_name = $_SESSION['user_id']) {
@@ -18,7 +18,7 @@ $user_name = trim((string) filter_input(INPUT_POST, 'user_name', FILTER_SANITIZE
 $password  = trim((string) filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS) );
 
 
-$message =   trim((string) filter_input(INPUT_GET, 'user_id', FILTER_SANITIZE_SPECIAL_CHARS) );
+//$message =   trim((string) filter_input(INPUT_GET, 'user_id', FILTER_SANITIZE_SPECIAL_CHARS) );
 
 
 //$message   = trim((string) $arr['user_id']);
@@ -51,24 +51,12 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4  ) {  //& strlen
             $_SESSION['user_name'] = $user_name;
             $_SESSION['password']  = $password;
 
-//Array
-//(
-//    [user_id] => 14
-//    [statement] => 2
-//    [user_name] => And-Box
-//    [password] => Rasmus
-//    [first_name] => Andrei
-//    [last_name] => Luk
-//    [user_pic_path] => 
-//    [image_id] => 0
-//)                
-           
-            $_SESSION['user_id']       = $result['user_id']       != null ? $result['user_id']       : '_____';
-            $_SESSION['statement']     = $result['statement']     != null ? $result['statement']     : '_____';
-            $_SESSION['first_name']    = $result['first_name']    != null ? $result['first_name']    : '_____';
-            $_SESSION['last_name']     = $result['last_name']     != null ? $result['last_name']     : '_____';
-            $_SESSION['user_pic_path'] = $result['user_pic_path'] != null ? $result['user_pic_path'] : '_____';
-            $_SESSION['image_id']      = $result['image_id']      != null ? $result['image_id']      : '_____';
+            $_SESSION['user_id']       = $result['user_id']       ?? null;
+            $_SESSION['statement']     = $result['statement']     ?? null;
+            $_SESSION['first_name']    = $result['first_name']    ?? null;
+            $_SESSION['last_name']     = $result['last_name']     ?? null;
+            $_SESSION['user_pic_path'] = $result['user_pic_path'] ?? null;
+            $_SESSION['image_id']      = $result['image_id']      ?? null;
             //header("Location: show_user.php?user_id=" . $result['user_id'] . "&user_name=". $user_name );   //login.php
             header("Location:". "show_user.php"
                     . "?user_name="    . $user_name
@@ -92,15 +80,15 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4  ) {  //& strlen
 }
 
 ?>
-
+<!DOCTYPE html>
 <html>   
     <title>{$page_title}</title>
     <link href="../css/phpmm.css" rel="stylesheet" type="text/css" />
-    <link href="./login.php" rel="alternate" type="text/PHP " />
+    <link href="./login.php" rel="alternate" type="text/plain" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"> </script>
     
-    <script type="text/javascript">
+    <script>
         
 //        $(document).ready(
 //                function(){
@@ -158,7 +146,7 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4  ) {  //& strlen
                 <br />
                                 
                 <label for="password">Пароль: </label>
-                <input type="password" name="password" size="20" " /><br />
+                <input type="password" name="password" size="20" /><br />
 
                 <p>&nbsp;</p>
 
@@ -170,13 +158,6 @@ if (isset($user_name) & isset($password) & strlen($user_name)>4  ) {  //& strlen
                 <input type="reset" value="Очистить "   />
             </fieldset>
             <br />
-            <?php 
-            echo '<pre>' ; 
-            echo "$ncolumn".'<br />';
-            print_r($result);
-            echo '</pre>' ;
-            ?>
-
             <br />
         </form>
         <br />

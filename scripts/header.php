@@ -4,6 +4,7 @@
 include_once ('functions.php');  //include_once ('functions.php');
 
 echo <<<_EOD
+<!DOCTYPE html>
     <html>
         <head>
             <title>$app $userstr</title>
