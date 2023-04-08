@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once 'app_config.php';
 //$dsn = "mysql:host=localhost;dbname=myDatabase;charset=utf8mb4";
 //$dsn = "mysql:host=localhost;dbname=myDatabase;charset=utf8mb4";
@@ -15,7 +17,7 @@ try {
     echo $pdo->errorCode() . '<br />'; 
 }
 
-function user_in_group(string $user_id, string $group): bool {
+function user_in_group(string|int $user_id, string $group): bool {
     global $pdo;
     $query_string = <<< SQL
                     SELECT ugr.user_id
@@ -64,14 +66,7 @@ function get_all_users($database): ? array {
 
 function display_title(string $page_title): void {
          
-//    if ( isset( $_SESSION['user_id'])  ) {
-//        $user_id = $_SESSION['user_id'];
-//        $user_name = $_SESSION["user_name"];
-//    } else {
-//        $user_id = '';
-//        $user_name =' GUEST ';
-//    }
-    
+   
     $user_id   = $_SESSION['user_id']   ?? '';
     $user_name = $_SESSION["user_name"] ?? 'GUEST_in_display_title';
     
@@ -113,6 +108,7 @@ function display_title(string $page_title): void {
                     <li><a href="index.php"> button 2</a></li>
                 </ul>
             </div>
+        </div>
         _END;
         }
 }

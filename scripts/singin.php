@@ -21,7 +21,7 @@ $email      = $_SESSION['email']      ?? 'not used now';
 ?>
 
 
-
+<!DOCTYPE html>
 <html>
     <head>
         <title>SINGUP</title>
@@ -53,7 +53,7 @@ $email      = $_SESSION['email']      ?? 'not used now';
         });
     </script>
 
-        
+
 <!-- <script type="text/javascript">
         function check_user_name(name){
             //var user_name = document.getElementByName(name); not

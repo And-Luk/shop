@@ -13,7 +13,7 @@ $user_name  = $_SESSION['user_name']  ?? null ;
 $password   = $_SESSION['password']   ?? null ;
 $first_name = $_SESSION['first_name'] ?? null ;
 $last_name  = $_SESSION['last_name']  ?? null ;
-$user_pic   = $_SESSION['user_pic_path'] ?? '';
+$user_pic   = $_SESSION['user_pic_path'] ?? '../sources/images/missing_user.png';
 $email      = $_SESSION['email']      ?? 'not used now';
 
 
@@ -44,42 +44,51 @@ $email      = $_SESSION['email']      ?? 'not used now';
 //}
 
 
-display_title('SHOW USER');
+display_title((string)'SHOW USER');
 ?>
    
-        <div>
-            <h1> Enter </h1>
-            <p> User Page  </p>
-            <div>
-                <img class="catalog" src="<?= $user_pic ?>" width="100px" align= "left">
-                <p> <?= '$user_id not work this' ?>  </p>
-                <p> <?= '$user_name not work this' ?> </p>
-            </div>
+    
+        <h1> Enter </h1>
+        <p> User Page  </p>
         
-            <br />
-             <!-- <form action="../index.php" method='post'>
-                <fieldset  class="center">
-                    <button id='but_err' class='button_nav' onclick="document.location.href='../index.php'"> TO HOME </button> 
-                </fieldset>
-            </form> -->
-             
-        <form action="../index.php" method='post'>
+        <table>
+            <tr>
+                <td><img class="catalog" src="<?= $user_pic ?>" width="100" alt="image_for"></td>
+                <td><p> <?= $first_name ?>  </p> <p> <?= $last_name ?> </p></td>
+            </tr>
+        </table>
+    <div>    
+<!--        <div>
+            <img class="catalog" src="<?= $user_pic ?>" width="100" align= "center">
+            <p> <?= $first_name ?>  </p> 
+            <p> <?= $last_name ?> </p>
+        </div> -->
+        
+        <br />
+<!--    <form action="../index.php" method='post'>
             <fieldset  class="center">
-                <?php
-                    echo <<<_END
+                <button id='but_err' class='button_nav' onclick="document.location.href='../index.php'"> TO HOME </button> 
+            </fieldset>
+        </form> -->
+        
+            <form action="../index.php" method='post'>
+                <fieldset  class="center">
+                    <?php
+                        echo <<<_END
                         <button id='but_err' class='button_nav' onclick="document.location.href='../index.php'"> TO HOME </button>
                         _END;
                     //echo " <br />" . " SINGIN.PHP " . __DIR__. "<br />";
-                ?>
-            </fieldset>
-        </form>
+                    ?>
+                </fieldset>
+            </form>
+        
              
-        </div>
-
-        <div id="footer" >
-            <p></p> 
-        </div>
     </div>
+
+    <div id="footer" >
+        <p></p> 
+    </div>
+<!--    </div>-->
 </body>
 </html>
 
